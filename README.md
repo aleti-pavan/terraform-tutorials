@@ -226,3 +226,61 @@ This is for Terraform tutorials
                     Name = "${var.tags}"
                 }
             }
+   
+   `5.terraform.tfvars` - keep all values in files
+
+      terraform.tfvars
+
+        access_key = "copy-your-access-key-here"
+        secret_key = "copy-your-secret-access-key-here"
+     
+     provider.tf
+      
+            provider "aws" {
+                region     = "${var.region}"
+                access_key = "${var.access_key}"
+                secret_key = "${var.secret_key}"
+            }
+
+       vars.tf
+
+            variable "region"{
+                description = "Region to create resources"
+                default     = "us-east-1"
+                type        = string #Default type is string
+            }
+
+            variable "access_key"{
+                description = "AWS Access Key"
+                #Moved the value to terraform.tfvars
+            }
+
+            variable "secret_key"{
+                description = "AWS Secret Key"
+                #Moved the value to terraform.tfvars
+            }
+
+            variable "tags"{
+                description = "Name for Tags"
+                default     = "my-ec2-instnace"
+            }
+            
+            variable "amis" {
+                    type = "map"
+                    default = {
+                        us-east-1 = "ami-13be557e"
+                        us-west-2 = "ami-06b94666"
+                        eu-west-1 = "ami-0d729a60"
+                    }
+            }
+
+        ec2.tf
+            resource "aws_instance" "example" {
+                ami           = "${lookup(var.amis, var.region)}"
+                instance_type = "t2.micro"
+
+                tags {
+                    Name = "${var.tags}"
+                }
+            }
+        
