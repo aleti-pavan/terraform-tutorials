@@ -1,7 +1,9 @@
 # terraform-tutorials
 This is for Terraform tutorials
 
-1. Installation of terraform
+1. 
+
+  Installation of terraform
     i) Create Linux EC2 (possibly RHEL)
     ii) Download the Linux version software to Mac
     iii) scp into EC2 to /home/ec2-user/
@@ -9,7 +11,9 @@ This is for Terraform tutorials
     iv) set the path
         `export PATH=$PATH:/home/ec2-user/`
 
-2. Terraform Style Guide
+2. 
+
+   Terraform Style Guide
    `https://github.com/jonbrouse/terraform-style-guide/blob/master/README.md`
 
 3. Different types of terraform blocks
