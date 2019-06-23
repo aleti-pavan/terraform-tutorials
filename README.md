@@ -80,6 +80,12 @@ This is for Terraform tutorials
      
 
 5. 
+
+    commands to be used:
+    
+      terraform init    - downloads the required modules
+      terraform plan    - used to create an execution plan
+      terraform apply   - used to apply the changes required to reach the desired state of the configuration, 
     
     `1.ec2-instance` folder and `main.tf`
     ```
@@ -105,3 +111,24 @@ This is for Terraform tutorials
                 }
             }
     ```
+
+    `2.ec2-instance-multi-files` split the files on purpose
+
+    provider.tf
+      
+            provider "aws" {
+                region     = "us-west-2"
+                access_key = "my-access-key"
+                secret_key = "my-secret-key"
+            }
+    
+    ec2.tf
+
+            resource "aws_instance" {
+                ami_id = "ami-id"  #find one from console
+                instance_type = "t2.micro"
+
+                tags {
+                    Name = "EC2 Instance"
+                }
+            }
