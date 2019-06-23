@@ -369,21 +369,11 @@ This is for Terraform tutorials
 
 
        |--modules
-
-
        |  |--vpc  - contains vars.tf, main.tf and output.tf
-
-
        |  |--ec2  - contains vars.tf, main.tf and output.tf
-
-
        |  |--rds  - contains vars.tf, main.tf and output.tf
-
-
        |--scripts - contains userdata.sh and other scripts needed.
-
        |--app
-
        |  |-- (main,vars and output).tf files to consume the 
        modules and create wordpress app
 
