@@ -332,7 +332,7 @@ This is for Terraform tutorials
                         "sudo systemctl start nginx",
                         ]
                 }
-                
+
                 connection {
                     type     = "ssh"
                     user     = "ec2-user"
@@ -342,4 +342,17 @@ This is for Terraform tutorials
                 
             }
 
+   `8.wordpress-app` - explore modules & create a directory structure
+       wordpress-app
+       |--modules
+       |  |--vpc  - contains vars.tf, main.tf and output.tf
+       |  |--ec2  - contains vars.tf, main.tf and output.tf
+       |  |--rds  - contains vars.tf, main.tf and output.tf
+       |--scripts - contains userdata.sh and other scripts needed.
+       |--app
+       |  |-- (main,vars and output).tf files to consume the modules and create wordpress app
+
+   `9. remote state`  remote state  
+      explain the state file and add remote state configuration
+      
         
