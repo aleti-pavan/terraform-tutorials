@@ -59,13 +59,13 @@ This is for Terraform tutorials
 
                     most_recent = true
                 }
-       ```
+       
 
 4. 
 
     `terraform.tfvars` for default variable values
 
-    ```
+    
     Terraform CLI defines the following meta-arguments, which can be used with any resource type to change the behavior of resources:
 
         depends_on, for specifying hidden dependencies
@@ -77,7 +77,7 @@ This is for Terraform tutorials
         lifecycle, for lifecycle customizations
 
         provisioner and connection, for taking extra actions after resource creation
-     ```
+     
 
 5. 
     `1.ec2-instance` folder and `main.tf`
