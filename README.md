@@ -311,6 +311,22 @@ This is for Terraform tutorials
         https://github.com/aleti-pavan/terraform-ec2
 
    `7. provisioners` - explore local and remote provisioners
+       
+       vars.tf
+          variable ssh_key {
+                default     = "~/.ssh/id_rsa.pub"
+                description = "Default pub key"
+          }
+          variable stack {
+                description = "this is name for tags"
+                default     = "terraform"
+          }
+
+       keypair.tf
+            resource "aws_key_pair" "keypair1" {
+                    key_name   = "${var.stack}-keypairs"
+                    public_key = "${file("${var.ssh_key}")}"
+            }
 
        ec2.tf
             resource "aws_instance" "example" {
@@ -327,7 +343,6 @@ This is for Terraform tutorials
 
                 provisioner "remote-exec" {
                     inline = [
-                        "sudo amazon-linux-extras enable nginx1.12",
                         "sudo yum -y install nginx",
                         "sudo systemctl start nginx",
                         ]
@@ -341,18 +356,38 @@ This is for Terraform tutorials
                 }
                 
             }
+        
+       outputs.tf
+            output "Login" {
+                value = "ssh -i ${aws_key_pair.keypair1.key_name} ec2-user@${aws_instance.example.public_ip}"
+            }
 
    `8.wordpress-app` - explore modules & create a directory structure
+
+
        wordpress-app
+
+
        |--modules
+
+
        |  |--vpc  - contains vars.tf, main.tf and output.tf
+
+
        |  |--ec2  - contains vars.tf, main.tf and output.tf
+
+
        |  |--rds  - contains vars.tf, main.tf and output.tf
+
+
        |--scripts - contains userdata.sh and other scripts needed.
+
        |--app
-       |  |-- (main,vars and output).tf files to consume the modules and create wordpress app
+
+       |  |-- (main,vars and output).tf files to consume the 
+       modules and create wordpress app
 
    `9. remote state`  remote state  
       explain the state file and add remote state configuration
-      
+
         
