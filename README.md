@@ -80,6 +80,7 @@ This is for Terraform tutorials
      
 
 5. 
+    
     `1.ec2-instance` folder and `main.tf`
     ```
             provider "aws" {
