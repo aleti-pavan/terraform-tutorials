@@ -177,7 +177,7 @@ This is for Terraform tutorials
                 }
             }
 
-    `4.ec2-with-diff-variables` explore map and list variables
+   `4.ec2-with-diff-variables` explore map and list variables
        
        
        provider.tf
