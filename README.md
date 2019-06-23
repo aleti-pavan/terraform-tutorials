@@ -82,13 +82,13 @@ This is for Terraform tutorials
 5. 
 
     commands to be used:
-    
+
       terraform init    - downloads the required modules
       terraform plan    - used to create an execution plan
       terraform apply   - used to apply the changes required to reach the desired state of the configuration, 
     
     `1.ec2-instance` folder and `main.tf`
-    ```
+   
             provider "aws" {
                 region     = "us-west-2"
                 access_key = "my-access-key"
@@ -99,9 +99,9 @@ This is for Terraform tutorials
                 ami_id = "ami-id"  #find one from console
                 instance_type = "t2.micro"
             }
-    ```
+   
     add tags to that and modify resource block.
-    ```
+    
             resource "aws_instance" {
                 ami_id = "ami-id"  #find one from console
                 instance_type = "t2.micro"
@@ -110,7 +110,7 @@ This is for Terraform tutorials
                     Name = "EC2 Instance"
                 }
             }
-    ```
+  
 
     `2.ec2-instance-multi-files` split the files on purpose
 
@@ -132,3 +132,47 @@ This is for Terraform tutorials
                     Name = "EC2 Instance"
                 }
             }
+
+   `3.ec2-with-variables` create vars.tf and create variables for region, access_key, secret_key and tags
+    
+    vars.tf
+
+         variable "region"{
+             description = "Region to create resources"
+             default     = "us-east-1"
+             type        = string #Default type is string
+         }
+         variable "access_key"{
+             description = "AWS Access Key"
+             default     = "copy-your-access-key-here"
+         }
+         variable "secret_key"{
+             description = "AWS Secret Key"
+             default     = "copy-your-secret-access-key-here"
+         }
+        variable "tags"{
+             description = "Name for Tags"
+             default     = "my-ec2-instnace"
+         }
+
+
+    provider.tf
+      
+            provider "aws" {
+                region     = "${var.region}"
+                access_key = "${var.access_key}"
+                secret_key = "${var.secret_key}"
+            }
+    
+    ec2.tf
+
+            resource "aws_instance" {
+                ami_id = "ami-id"  #find one from console
+                instance_type = "t2.micro"
+
+                tags {
+                    Name = "${var.tags}"
+                }
+            }
+
+            
