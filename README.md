@@ -4,6 +4,8 @@ This is for Terraform tutorials
 1. 
 
   Installation of terraform
+        
+        
         i) Create Linux EC2 (possibly RHEL)
 
 
@@ -13,7 +15,7 @@ This is for Terraform tutorials
         iii) scp into EC2 to /home/ec2-user/
         `scp -i mykey.pem /path/to/terrafor/file ec2-user@host-ip:/home/ec2-user`
 
-        
+
         iv) set the path
             `export PATH=$PATH:/home/ec2-user/`
 
