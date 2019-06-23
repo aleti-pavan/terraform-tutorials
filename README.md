@@ -4,17 +4,15 @@ This is for Terraform tutorials
 1. 
 
   Installation of terraform
-    i) Create Linux EC2 (possibly RHEL)
-    ii) Download the Linux version software to Mac
-    iii) scp into EC2 to /home/ec2-user/
-     `scp -i mykey.pem /path/to/terrafor/file ec2-user@host-ip:/home/ec2-user`
-    iv) set the path
-        `export PATH=$PATH:/home/ec2-user/`
+        i) Create Linux EC2 (possibly RHEL)
+        ii) Download the Linux version software to Mac
+        iii) scp into EC2 to /home/ec2-user/
+        `scp -i mykey.pem /path/to/terrafor/file ec2-user@host-ip:/home/ec2-user`
+        iv) set the path
+            `export PATH=$PATH:/home/ec2-user/`
 
-2. 
-
-   Terraform Style Guide
-   `https://github.com/jonbrouse/terraform-style-guide/blob/master/README.md`
+2.   Terraform Style Guide
+     `https://github.com/jonbrouse/terraform-style-guide/blob/master/README.md`
 
 3. Different types of terraform blocks
       i) provider block - declaring providers
