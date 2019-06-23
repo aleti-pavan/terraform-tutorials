@@ -13,7 +13,7 @@ This is for Terraform tutorials
 
 
         iii) scp into EC2 to /home/ec2-user/
-        
+
         `scp -i mykey.pem /path/to/terrafor/file ec2-user@host-ip:/home/ec2-user`
 
 
@@ -236,7 +236,7 @@ This is for Terraform tutorials
                 }
             }
    
-   `5.terraform.tfvars` - keep all values in files
+   `5.terraform.tfvars and outputs.tf` - keep all values in files
 
       terraform.tfvars
 
@@ -283,6 +283,13 @@ This is for Terraform tutorials
                     }
             }
 
+            variable "port_number" {
+                description = "Remote tcp port to be used for access to the vms created via the nsg applied to the nics."
+                default = ["22","3000","9090","9093"]
+                type = "list"
+            }
+
+
         ec2.tf
             resource "aws_instance" "example" {
                 ami           = "${lookup(var.amis, var.region)}"
@@ -292,4 +299,47 @@ This is for Terraform tutorials
                     Name = "${var.tags}"
                 }
             }
+
+        outputs.tf    
+            output "ip" {
+                value = ${aws_instance.example.public_ip}
+                #Refer the outputs of the aws_instance
+            }
+
+   `6. count` - create 2 ec2 instances to explore count
+       
+        https://github.com/aleti-pavan/terraform-ec2
+
+   `7. provisioners` - explore local and remote provisioners
+
+       ec2.tf
+            resource "aws_instance" "example" {
+                ami           = "${lookup(var.amis, var.region)}"
+                instance_type = "t2.micro"
+
+                tags {
+                    Name = "${var.tags}"
+                }
+
+                provisioner "local-exec" {
+                    command = "echo ${aws_instance.example.public_ip} >> public_ip.txt"
+                }
+
+                provisioner "remote-exec" {
+                    inline = [
+                        "sudo amazon-linux-extras enable nginx1.12",
+                        "sudo yum -y install nginx",
+                        "sudo systemctl start nginx",
+                        ]
+                }
+                
+                connection {
+                    type     = "ssh"
+                    user     = "ec2-user"
+                    password = ""
+                    private_key = "${file("~/.ssh/id_rsa")}"
+                }
+                
+            }
+
         
