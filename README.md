@@ -1,11 +1,11 @@
 # terraform-tutorials  (Pavan Kumar Aleti)
 This is for Terraform tutorials
 
-1. 
+1.
 
   Installation of terraform
-        
-        
+
+
         i) Create Linux EC2 (possibly RHEL)
 
 
@@ -70,13 +70,13 @@ This is for Terraform tutorials
 
                     most_recent = true
                 }
-       
 
-4. 
+
+4.
 
     `terraform.tfvars` for default variable values
 
-    
+
     Terraform CLI defines the following meta-arguments, which can be used with any resource type to change the behavior of resources:
 
         depends_on, for specifying hidden dependencies
@@ -88,31 +88,31 @@ This is for Terraform tutorials
         lifecycle, for lifecycle customizations
 
         provisioner and connection, for taking extra actions after resource creation
-     
 
-5. 
+
+5.
 
     commands to be used:
 
       terraform init    - downloads the required modules
       terraform plan    - used to create an execution plan
-      terraform apply   - used to apply the changes required to reach the desired state of the configuration, 
-    
+      terraform apply   - used to apply the changes required to reach the desired state of the configuration,
+
     `1.ec2-instance` folder and `main.tf`
-   
+
             provider "aws" {
                 region     = "us-west-2"
                 access_key = "my-access-key"
                 secret_key = "my-secret-key"
             }
-            
+
             resource "aws_instance" {
                 ami_id = "ami-id"  #find one from console
                 instance_type = "t2.micro"
             }
-   
+
     add tags to that and modify resource block.
-    
+
             resource "aws_instance" {
                 ami_id = "ami-id"  #find one from console
                 instance_type = "t2.micro"
@@ -121,18 +121,18 @@ This is for Terraform tutorials
                     Name = "EC2 Instance"
                 }
             }
-  
+
 
     `2.ec2-instance-multi-files` split the files on purpose
 
     provider.tf
-      
+
             provider "aws" {
                 region     = "us-west-2"
                 access_key = "my-access-key"
                 secret_key = "my-secret-key"
             }
-    
+
     ec2.tf
 
             resource "aws_instance" {
@@ -145,7 +145,7 @@ This is for Terraform tutorials
             }
 
    `3.ec2-with-str-variables` create vars.tf and create variables for region, access_key, secret_key and tags
-    
+
     vars.tf
 
          variable "region"{
@@ -168,13 +168,13 @@ This is for Terraform tutorials
 
 
     provider.tf
-      
+
             provider "aws" {
                 region     = "${var.region}"
                 access_key = "${var.access_key}"
                 secret_key = "${var.secret_key}"
             }
-    
+
     ec2.tf
 
             resource "aws_instance" {
@@ -187,10 +187,10 @@ This is for Terraform tutorials
             }
 
    `4.ec2-with-diff-variables` explore map and list variables
-       
-       
+
+
        provider.tf
-      
+
             provider "aws" {
                 region     = "${var.region}"
                 access_key = "${var.access_key}"
@@ -216,7 +216,7 @@ This is for Terraform tutorials
                 description = "Name for Tags"
                 default     = "my-ec2-instnace"
             }
-            
+
             variable "amis" {
                     type = "map"
                     default = {
@@ -235,16 +235,16 @@ This is for Terraform tutorials
                     Name = "${var.tags}"
                 }
             }
-   
+
    `5.terraform.tfvars and outputs.tf` - keep all values in files
 
       terraform.tfvars
 
         access_key = "copy-your-access-key-here"
         secret_key = "copy-your-secret-access-key-here"
-     
+
      provider.tf
-      
+
             provider "aws" {
                 region     = "${var.region}"
                 access_key = "${var.access_key}"
@@ -273,7 +273,7 @@ This is for Terraform tutorials
                 description = "Name for Tags"
                 default     = "my-ec2-instnace"
             }
-            
+
             variable "amis" {
                     type = "map"
                     default = {
@@ -307,11 +307,11 @@ This is for Terraform tutorials
             }
 
    `6. count` - create 2 ec2 instances to explore count
-       
+
         https://github.com/aleti-pavan/terraform-ec2
 
    `7. provisioners` - explore local and remote provisioners
-       
+
        vars.tf
           variable ssh_key {
                 default     = "~/.ssh/id_rsa.pub"
@@ -354,13 +354,15 @@ This is for Terraform tutorials
                     password = ""
                     private_key = "${file("~/.ssh/id_rsa")}"
                 }
-                
+
             }
-        
+
        outputs.tf
             output "Login" {
                 value = "ssh -i ${aws_key_pair.keypair1.key_name} ec2-user@${aws_instance.example.public_ip}"
             }
+
+   `8. template`
 
    `8.wordpress-app` - explore modules & create a directory structure
 
@@ -374,10 +376,8 @@ This is for Terraform tutorials
        |  |--rds  - contains vars.tf, main.tf and output.tf
        |--scripts - contains userdata.sh and other scripts needed.
        |--app
-       |  |-- (main,vars and output).tf files to consume the 
+       |  |-- (main,vars and output).tf files to consume the
        modules and create wordpress app
 
    `9. remote state`  remote state  
       explain the state file and add remote state configuration
-
-        
