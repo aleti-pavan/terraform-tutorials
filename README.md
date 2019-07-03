@@ -104,7 +104,7 @@ This is for Terraform tutorials
       terraform plan    - used to create an execution plan
       terraform apply   - used to apply the changes required to reach the desired state of the configuration,
 
-    `1.ec2-instance` folder and `main.tf`
+  `1.ec2-instance` folder and `main.tf`
 
             provider "aws" {
                 region     = "us-west-2"
@@ -129,7 +129,7 @@ This is for Terraform tutorials
             }
 
 
-    `2.ec2-instance-multi-files` split the files on purpose
+  `2.ec2-instance-multi-files` split the files on purpose
 
             provider.tf
 
