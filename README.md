@@ -74,10 +74,23 @@ This is for Terraform tutorials
 
         v) terraform block - terraform specific settings are gathered into this section.
         ```
-                     Each terraform block can contain a number of settings related to Terraform's behavior. Within a terraform block, only constant values can be used; arguments may not refer to named objects such as resources, input variables, etc, and may not use any of the Terraform language built-in functions.
+                 Each terraform block can contain a number of settings related to Terraform's behavior. Within a terraform block, only constant values can be used; arguments may not refer to named objects such as resources, input variables, etc, and may not use any of the Terraform language built-in functions.
 
-                     `https://www.terraform.io/docs/configuration/terraform.html`
+                 https://www.terraform.io/docs/configuration/terraform.html
+                 locking terraform required_version.
+                 terraform {
+                   required_version = "~> 0.11.8"
 
+                   backend "s3" {
+                     encrypt = true
+                   }
+                 }
+                 Locking particular provider version
+                 provider "aws" {
+                   version = "~> 2.17.0"
+
+                 }
+        ```
 4.
 
     `terraform.tfvars` for default variable values
