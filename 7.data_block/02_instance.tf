@@ -2,15 +2,13 @@ data "aws_availability_zones" "all" {}
 
 resource "aws_instance" "ec2" {
   //ami           = "${lookup(var.amis, var.region)}"
-  ami = "${data.aws_ami.rhel.id}"
+  ami           = "${data.aws_ami.rhel.id}"
   instance_type = "t2.micro"
 
   tags {
     Name = "class-instnace"
   }
 }
-
-
 
 data "aws_ami" "rhel" {
   most_recent = true

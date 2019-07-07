@@ -16,5 +16,5 @@ output "azs" {
 }
 
 output "ami" {
-value = "${aws_instance.ec2.ami}"
+  value = "${aws_instance.ec2.ami}"
 }
