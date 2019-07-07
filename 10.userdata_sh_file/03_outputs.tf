@@ -4,7 +4,7 @@ output "public_ip" {
 }
 
 output "login" {
-value = "ssh -i 2019-aws-class ec2-user@"
+  value = "ssh -i 2019-aws-class ec2-user@"
 }
 
 output "private_ip" {

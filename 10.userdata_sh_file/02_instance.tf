@@ -1,18 +1,18 @@
 data "aws_availability_zones" "all" {}
 
 resource "aws_instance" "ec2" {
-count =1
+  count = 1
 
   //ami           = "${lookup(var.amis, var.region)}"
   ami           = "${data.aws_ami.rhel.id}"
   instance_type = "t2.micro"
-  key_name = "2019-aws-class"
-  user_data = "${file("scripts/redhat_nginx.sh")}"
-      tags {
-        Name = "class-instnace ${count.index}"
-        Purpose = "${var.tag_list[count.index]}"
-      }
+  key_name      = "2019-aws-class"
+  user_data     = "${file("scripts/redhat_nginx.sh")}"
 
+  tags {
+    Name    = "class-instnace ${count.index}"
+    Purpose = "${var.tag_list[count.index]}"
+  }
 }
 
 data "aws_ami" "rhel" {
