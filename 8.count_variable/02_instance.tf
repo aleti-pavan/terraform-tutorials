@@ -8,10 +8,9 @@ resource "aws_instance" "ec2" {
   instance_type = "t2.micro"
 
   tags {
-    Name = "class-instnace ${count.index}"
+    Name    = "class-instnace ${count.index}"
     Purpose = "${var.tag_list[count.index]}"
   }
-  
 }
 
 data "aws_ami" "rhel" {

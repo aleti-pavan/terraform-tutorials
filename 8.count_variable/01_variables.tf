@@ -11,10 +11,12 @@ variable "secret_key" {}
 variable "tags" {
   default = "terraform"
 }
+
 variable "tag_list" {
-type = "list"
-default = ["web","db"]
+  type    = "list"
+  default = ["web", "db"]
 }
+
 variable "amis" {
   type = "map"
 
