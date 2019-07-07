@@ -385,16 +385,25 @@ This is for Terraform tutorials
 
 
        wordpress-app
-
-
-       |--modules
-       |  |--vpc  - contains vars.tf, main.tf and output.tf
-       |  |--ec2  - contains vars.tf, main.tf and output.tf
-       |  |--rds  - contains vars.tf, main.tf and output.tf
-       |--scripts - contains userdata.sh and other scripts needed.
-       |--app
-       |  |-- (main,vars and output).tf files to consume the
-       modules and create wordpress app
+        ├── app
+        │   ├── provider.tf
+        │   ├── terraform.tfvars
+        │   ├── vars.tf
+        │   └── wordpress.tf
+        ├── modules
+        │   ├── ec2
+        │   │   ├── main.tf
+        │   │   ├── ouput.tf
+        │   │   └── vars.tf
+        │   ├── rds
+        │   │   ├── main.tf
+        │   │   ├── ouput.tf
+        │   │   └── vars.tf
+        │   └── vpc
+        │       ├── main.tf
+        │       ├── ouput.tf
+        │       └── vars.tf
+        └── scripts
 
    `9. remote state`  remote state  
       explain the state file and add remote state configuration
