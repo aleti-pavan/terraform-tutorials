@@ -405,8 +405,10 @@ This is for Terraform tutorials
         │       └── vars.tf
         └── scripts
 
-   `9. remote state`  remote state  
-      explain the state file and add remote state configuration
-
    `10. terraform-env-variables`
         https://www.terraform.io/docs/commands/environment-variables.html
+
+   `9. remote state - backend`  
+          remote state - explain the state file and add remote state configuration
+          
+   `11. Locking the State with S3 and DynamoDB`
