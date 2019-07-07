@@ -70,8 +70,27 @@ This is for Terraform tutorials
 
                     most_recent = true
                 }
+        ```
 
+        v) terraform block - terraform specific settings are gathered into this section.
+        ```
+                 Each terraform block can contain a number of settings related to Terraform's behavior. Within a terraform block, only constant values can be used; arguments may not refer to named objects such as resources, input variables, etc, and may not use any of the Terraform language built-in functions.
 
+                 https://www.terraform.io/docs/configuration/terraform.html
+                 locking terraform required_version.
+                 terraform {
+                   required_version = "~> 0.11.8"
+
+                   backend "s3" {
+                     encrypt = true
+                   }
+                 }
+                 Locking particular provider version
+                 provider "aws" {
+                   version = "~> 2.17.0"
+
+                 }
+        ```
 4.
 
     `terraform.tfvars` for default variable values
@@ -98,7 +117,7 @@ This is for Terraform tutorials
       terraform plan    - used to create an execution plan
       terraform apply   - used to apply the changes required to reach the desired state of the configuration,
 
-    `1.ec2-instance` folder and `main.tf`
+  `1.ec2-instance` folder and `main.tf`
 
             provider "aws" {
                 region     = "us-west-2"
@@ -123,68 +142,68 @@ This is for Terraform tutorials
             }
 
 
-    `2.ec2-instance-multi-files` split the files on purpose
+  `2.ec2-instance-multi-files` split the files on purpose
 
-    provider.tf
+            provider.tf
 
-            provider "aws" {
-                region     = "us-west-2"
-                access_key = "my-access-key"
-                secret_key = "my-secret-key"
-            }
+                    provider "aws" {
+                        region     = "us-west-2"
+                        access_key = "my-access-key"
+                        secret_key = "my-secret-key"
+                    }
 
-    ec2.tf
+            ec2.tf
 
-            resource "aws_instance" {
-                ami_id = "ami-id"  #find one from console
-                instance_type = "t2.micro"
+                    resource "aws_instance" {
+                        ami_id = "ami-id"  #find one from console
+                        instance_type = "t2.micro"
 
-                tags {
-                    Name = "EC2 Instance"
-                }
-            }
+                        tags {
+                            Name = "EC2 Instance"
+                        }
+                    }
 
    `3.ec2-with-str-variables` create vars.tf and create variables for region, access_key, secret_key and tags
 
-    vars.tf
+            vars.tf
 
-         variable "region"{
-             description = "Region to create resources"
-             default     = "us-east-1"
-             type        = string #Default type is string
-         }
-         variable "access_key"{
-             description = "AWS Access Key"
-             default     = "copy-your-access-key-here"
-         }
-         variable "secret_key"{
-             description = "AWS Secret Key"
-             default     = "copy-your-secret-access-key-here"
-         }
-        variable "tags"{
-             description = "Name for Tags"
-             default     = "my-ec2-instnace"
-         }
+                 variable "region"{
+                     description = "Region to create resources"
+                     default     = "us-east-1"
+                     type        = string #Default type is string
+                 }
+                 variable "access_key"{
+                     description = "AWS Access Key"
+                     default     = "copy-your-access-key-here"
+                 }
+                 variable "secret_key"{
+                     description = "AWS Secret Key"
+                     default     = "copy-your-secret-access-key-here"
+                 }
+                variable "tags"{
+                     description = "Name for Tags"
+                     default     = "my-ec2-instnace"
+                 }
 
 
-    provider.tf
+            provider.tf
 
-            provider "aws" {
-                region     = "${var.region}"
-                access_key = "${var.access_key}"
-                secret_key = "${var.secret_key}"
-            }
+                    provider "aws" {
+                        region     = "${var.region}"
+                        access_key = "${var.access_key}"
+                        secret_key = "${var.secret_key}"
+                    }
 
-    ec2.tf
+            ec2.tf
 
-            resource "aws_instance" {
-                ami_id = "ami-id"  #find one from console
-                instance_type = "t2.micro"
+                    resource "aws_instance" {
+                        ami_id = "ami-id"  #find one from console
+                        instance_type = "t2.micro"
 
-                tags {
-                    Name = "${var.tags}"
-                }
-            }
+                        tags {
+                            Name = "${var.tags}"
+                        }
+                    }
 
    `4.ec2-with-diff-variables` explore map and list variables
 
@@ -362,8 +381,6 @@ This is for Terraform tutorials
                 value = "ssh -i ${aws_key_pair.keypair1.key_name} ec2-user@${aws_instance.example.public_ip}"
             }
 
-   `8. template`
-
    `8.wordpress-app` - explore modules & create a directory structure
 
 
@@ -381,3 +398,6 @@ This is for Terraform tutorials
 
    `9. remote state`  remote state  
       explain the state file and add remote state configuration
+
+   `10. terraform-env-variables`
+        https://www.terraform.io/docs/commands/environment-variables.html
