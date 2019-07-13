@@ -21,7 +21,9 @@ resource "aws_instance" "ec2" {
     connection {
       type     = "ssh"
       user     = "ec2-user"
-      password = "${file("~/Downloads/2019-aws-class.pem.txt")}"
+      port     = 22
+      private_key = "${file("~/Downloads/2019-aws-class.pem.txt")}"
+      host = "${aws_instance.ec2.public_ip}"
     }
   }
 }
