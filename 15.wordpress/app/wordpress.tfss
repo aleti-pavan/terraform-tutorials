@@ -1,0 +1,21 @@
+module "vpc" {
+source = "../modules/vpc"
+stack = "${var.stack}"
+}
+
+output "private_subnet1" {
+value = "${module.vpc.private_subnet1}"
+}
+
+output "private_subnet2" {
+value = "${module.vpc.private_subnet2}"
+}
+module "rds" {
+source = "../modules/rds"
+depends_on = ["module.vpc.nat_id"]
+stack = "${var.stack}"
+##subnet_ids = ["subnet-032955b98ea7fb69f","subnet-03a2b3a65180d2c7e"]
+subnet_ids = ["module.vpc.private_subnet1","module.vpc.private_subnet1"]
+db_user = "${var.db_user}"
+db_pass = "${var.db_pass}"
+}
