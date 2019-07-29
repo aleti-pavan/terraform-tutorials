@@ -410,5 +410,6 @@ This is for Terraform tutorials
 
    `9. remote state - backend`  
           remote state - explain the state file and add remote state configuration
-          
+
    `11. Locking the State with S3 and DynamoDB`
+          `state_lock repository `
