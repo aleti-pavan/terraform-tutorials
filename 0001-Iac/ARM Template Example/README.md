@@ -20,3 +20,5 @@ az deployment create --template-file rg.json --parameters @params-rg.json --loca
 ## Delete RG
 
 `az group delete -n my-rg`
+
+`az group deployment cancel --name --resource-group [--subscription]`
