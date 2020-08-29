@@ -9,9 +9,14 @@
 ## Validate & Deploy Template
 
 ```
-az deployment validate --template-file rg.json --parameters @params-rg.json --location westus
+az deployment validate --template-file resourcegroup/rg.json --parameters @resourcegroup/params-rg.json --location westus | jq
 
 (above command throws you a json if the template is valid)
 
 az deployment create --template-file rg.json --parameters @params-rg.json --location westus --name rg
+
 ```
+
+## Delete RG
+
+`az group delete -n my-rg`
